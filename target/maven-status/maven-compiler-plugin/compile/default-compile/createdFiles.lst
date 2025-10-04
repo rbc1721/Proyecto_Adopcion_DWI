@@ -1,4 +1,2 @@
 com\proyecto\adopcion\App.class
-config\Conexion.class
-modelo\Reportes.class
 dao\PruebaConexion.class

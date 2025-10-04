@@ -7,7 +7,7 @@ import java.sql.SQLException;
 public class Conexion {
 
     private static Conexion instancia;
-    private static Connection conexion = null;
+    private Connection conexion = null;
     
     private static final String host = "rastreando-huellitas-rastreando-huellitas.g.aivencloud.com";
     private static final String port = "17573";
