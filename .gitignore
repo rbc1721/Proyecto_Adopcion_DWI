@@ -1,0 +1,29 @@
+# === NetBeans ===
+nbproject/private/
+build/
+dist/
+nbbuild/
+nball/
+src/config/Conexion.java
+*.orig
+
+# === Maven ===
+target/
+logs/
+
+# === Archivos temporales ===
+*.log
+*.tmp
+*.bak
+*.swp
+
+# === IDEs alternativos (por si alguien abre con otro IDE) ===
+# Eclipse
+.settings/
+.project
+.classpath
+
+# IntelliJ
+.idea/
+*.iml
+out/
