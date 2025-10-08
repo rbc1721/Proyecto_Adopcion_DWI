@@ -15,7 +15,7 @@ public class Reportes {
     private String direccion;
     private String estado;
     private String idUduario;
-    private int idMascota;
+    private Integer idMascota;
 
     public Reportes(String tipo, LocalDate fecha, String direccion, String estado, String idUduario, int idMascota) {
         this.tipo = tipo;
@@ -24,6 +24,10 @@ public class Reportes {
         this.estado = estado;
         this.idUduario = idUduario;
         this.idMascota = idMascota;
+    }
+    
+    public Reportes(){
+        
     }
 
     public int getCodigo() {
@@ -74,11 +78,11 @@ public class Reportes {
         this.idUduario = idUduario;
     }
 
-    public int getIdMascota() {
+    public Integer getIdMascota() {
         return idMascota;
     }
 
-    public void setIdMascota(int idMascota) {
+    public void setIdMascota(Integer idMascota) {
         this.idMascota = idMascota;
     }
 

@@ -1,2 +1,6 @@
 com\proyecto\adopcion\App.class
+controlador\ReporteServlet.class
+dao\ReportesDao.class
+config\Conexion.class
+modelo\Reportes.class
 dao\PruebaConexion.class
