@@ -79,9 +79,8 @@ public class BuscarServlet extends HttpServlet {
             request.setAttribute("mensaje", "Error al intentar registrar los datos de la mascota");
         }
         RequestDispatcher rd = request.getRequestDispatcher("buscar.jsp");
-        rd.forward(request, response);
-        
-        System.out.println("nombre de la mascota es " + nombre );
+        rd.forward(request, response);        
+     
     }
 
 }
