@@ -3,20 +3,12 @@
     <context-param>
         <param-name>jakarta.faces.PROJECT_STAGE</param-name>
         <param-value>Development</param-value>
-    </context-param>
-    <servlet>
-        <servlet-name>Faces Servlet</servlet-name>
-        <servlet-class>jakarta.faces.webapp.FacesServlet</servlet-class>
-        <load-on-startup>1</load-on-startup>
-    </servlet>
+    </context-param>    
     <servlet>
         <servlet-name>ReporteServlet</servlet-name>
-        <servlet-class>controlador.ReporteServlet</servlet-class>
+        <servlet-class>controlador.BuscarServlet</servlet-class>
     </servlet>
-    <servlet-mapping>
-        <servlet-name>Faces Servlet</servlet-name>
-        <url-pattern>/faces/*</url-pattern>
-    </servlet-mapping>
+
     <servlet-mapping>
         <servlet-name>ReporteServlet</servlet-name>
         <url-pattern>/ReporteServlet</url-pattern>

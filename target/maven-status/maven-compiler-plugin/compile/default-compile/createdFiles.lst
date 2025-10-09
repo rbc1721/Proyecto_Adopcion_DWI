@@ -1,6 +1,8 @@
 com\proyecto\adopcion\App.class
-controlador\ReporteServlet.class
-dao\ReportesDao.class
+dao\ReporteDao.class
+controlador\BuscarServlet.class
+modelo\Mascota.class
+dao\MascotaDao.class
 config\Conexion.class
-modelo\Reportes.class
 dao\PruebaConexion.class
+modelo\Reporte.class

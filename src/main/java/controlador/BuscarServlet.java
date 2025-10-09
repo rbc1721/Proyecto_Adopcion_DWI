@@ -1,6 +1,7 @@
-
 package controlador;
 
+import dao.MascotaDao;
+import dao.ReporteDao;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.*;
@@ -9,16 +10,19 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.Part;
 import java.io.File;
+import java.time.LocalDate;
+import modelo.Mascota;
+import modelo.Reporte;
 
 /**
  *
  * @author Eduardo
  */
-public class ReporteServlet extends HttpServlet {
+public class BuscarServlet extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-       
+
     }
 
     @Override
@@ -31,15 +35,18 @@ public class ReporteServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
-        
+
         String nombre = request.getParameter("nombre");
         String especie = request.getParameter("especie");
         String raza = request.getParameter("raza");
         String color = request.getParameter("color");
-        //int edad = Integer.parseInt(request.getParameter("edad"));
-        String edad = request.getParameter("edad");
+        int edad = Integer.parseInt(request.getParameter("edad"));
         String tamanio = request.getParameter("tamanio");
         String descripcion = request.getParameter("descripcion");
+
+        String direccion = "";
+        String idUsuario = "pepe";
+
         /*
         Part archivo = request.getPart("foto");
         String nombreArchivo = archivo.getSubmittedFileName();
@@ -55,8 +62,26 @@ public class ReporteServlet extends HttpServlet {
         
         archivo.write(ruta+File.separator+nombreArchivo);
         response.getWriter().println("Se ha registrado correctamente");
-        */
-        System.out.println("La mascota se llama: " + nombre);
+         */
+        Mascota mascota = new Mascota(nombre, especie, raza, color, edad, tamanio, descripcion, color);
+
+        if (MascotaDao.registrar(mascota) > 0) {
+
+            int idMascota = MascotaDao.registrar(mascota);
+
+            Reporte reporte = new Reporte("Busqueda", LocalDate.now(), direccion, "Pendiente", idUsuario, idMascota);
+            if (ReporteDao.registrar(reporte) > 0) {
+                request.setAttribute("mensaje", "Registro exitoso");
+            } else {
+                request.setAttribute("mensaje", "Error al intentar registrar el reporte de busqueda");
+            }
+        } else {
+            request.setAttribute("mensaje", "Error al intentar registrar los datos de la mascota");
+        }
+        RequestDispatcher rd = request.getRequestDispatcher("buscar.jsp");
+        rd.forward(request, response);
+        
+        System.out.println("nombre de la mascota es " + nombre );
     }
 
 }

@@ -1,7 +1,7 @@
 <%-- 
     Document   : buscar2
     Created on : 7 oct. 2025, 9:30:49 p. m.
-    Author     : Eduardo
+    Author     : Eduardo Olea
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -18,7 +18,7 @@
 
         <h3>Datos de mi mascota</h3>   
         <!-- Pendiente implementar envíod e imagen -->
-        Pendiente implementar envíod e imagen
+        Pendiente implementar envío de imagen
         <form action="ReporteServlet" method="post" enctype="form-data">
             <label for="nombre">Nombre:</label>
             <input type="text" id="nombre" name="nombre" required>
@@ -53,9 +53,13 @@
 
             <label>:</label>
             <input type="file" id="foto" name="foto" accept="image/*" >
-            
+               Pendiente implementar envío de imagen
             <button type="submit">Registrar</button>
         </form>
+        
+    <c:if mensaje ="${not empty mensaje}">
+        <p>${mensaje}</p>
+    </c:if>
     </body>
 </html>
 

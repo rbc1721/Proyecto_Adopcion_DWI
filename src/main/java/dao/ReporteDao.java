@@ -5,22 +5,26 @@ import config.Conexion;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
-import modelo.Reportes;
+import modelo.Reporte;
 
 /**
  *
  * @author Eduardo
  * Clase DAO para reportes
  */
-public class ReportesDao {    
+public class ReporteDao {    
     
-    public static boolean registrarReporte(Reportes reporte){
-        String sql = "INSERT INTO reportes(String tipo, LocalDate fecha, String direccion, String estado, String idUduario, int idMascota)";
+    public static int registrar(Reporte reporte){
+        
+        System.out.println("Estoy tratando de registrar el reporte");
+        int codigo = -1;
+        String sql = "INSERT INTO reportes(tipo, fecha, direccion, estado, idUsuario, idMascota) VALUES(?,?,?,?,?,?)";
         try {
             Connection conexion = Conexion.getInstancia().getConexion();
-            PreparedStatement ps = conexion.prepareStatement(sql);
+            PreparedStatement ps = conexion.prepareStatement(sql,Statement.RETURN_GENERATED_KEYS);
             
             ps.setString(1, reporte.getTipo());
             ps.setDate(2, java.sql.Date.valueOf(reporte.getFecha()));
@@ -33,17 +37,23 @@ public class ReportesDao {
                 ps.setNull(6, java.sql.Types.INTEGER);
             }
             
-            return ps.executeUpdate()>0;
+            if(ps.executeUpdate()>0){
+                ResultSet rs = ps.getGeneratedKeys();               
+                if(rs.next()){
+                    codigo= rs.getInt(1);
+                }
+            }   
+            return codigo;
             
         } catch (Exception e) {
             e.printStackTrace();
             e.getMessage();
         }
-        return false;
+        return codigo;
     }
     
-    public static List<Reportes> obtenerReportes(){
-        List<Reportes> reportes = new ArrayList<>();
+    public static List<Reporte> obtener(){
+        List<Reporte> reportes = new ArrayList<>();
         String sql = "SELECT * FROM reportes WHERE idReporte = ?";
         
         try {
@@ -52,7 +62,7 @@ public class ReportesDao {
             ResultSet datos = ps.executeQuery();
             
             while(datos.next()){
-                Reportes reporte = new Reportes();
+                Reporte reporte = new Reporte();
                 
                 reporte.setCodigo(datos.getInt("idReporte"));
                 reporte.setTipo(datos.getString("tipo"));
@@ -70,22 +80,21 @@ public class ReportesDao {
         return reportes;
     }
     
-    public static boolean actualizarReportes(Reportes reporte){
+    public static boolean actualizar(Reporte reporte){
         String sql = "UPDATE reportes SET estado = ? WHERE idReporte = ? ";
         
         try {
             Connection conexion = Conexion.getInstancia().getConexion();
             PreparedStatement ps = conexion.prepareStatement(sql);
             
-            ps.setString(4, reporte.getEstado());
-            ps.setInt(6, reporte.getIdMascota());
+            ps.setString(5, reporte.getEstado());
+            ps.setInt(7, reporte.getIdMascota());
         } catch (Exception e) {
             e.printStackTrace();
         }
         return false;
     }
-    
-    
+      
     
     
 }

@@ -1,6 +1,8 @@
-E:\UTP\DWI\Proyecto\proyectoDWI\src\main\java\controlador\ReporteServlet.java
 E:\UTP\DWI\Proyecto\proyectoDWI\src\main\java\dao\PruebaConexion.java
 E:\UTP\DWI\Proyecto\proyectoDWI\src\main\java\com\proyecto\adopcion\App.java
-E:\UTP\DWI\Proyecto\proyectoDWI\src\main\java\dao\ReportesDao.java
-E:\UTP\DWI\Proyecto\proyectoDWI\src\main\java\modelo\Reportes.java
+E:\UTP\DWI\Proyecto\proyectoDWI\src\main\java\modelo\Reporte.java
+E:\UTP\DWI\Proyecto\proyectoDWI\src\main\java\controlador\BuscarServlet.java
+E:\UTP\DWI\Proyecto\proyectoDWI\src\main\java\modelo\Mascota.java
+E:\UTP\DWI\Proyecto\proyectoDWI\src\main\java\dao\MascotaDao.java
 E:\UTP\DWI\Proyecto\proyectoDWI\src\main\java\config\Conexion.java
+E:\UTP\DWI\Proyecto\proyectoDWI\src\main\java\dao\ReporteDao.java

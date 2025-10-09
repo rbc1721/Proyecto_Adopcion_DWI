@@ -8,7 +8,7 @@ import java.time.LocalDate;
  * @author Eduardo
  * Buscar una mascota
  */
-public class Reportes {
+public class Reporte {
     private int codigo;
     private String tipo;
     private LocalDate fecha;
@@ -17,7 +17,7 @@ public class Reportes {
     private String idUduario;
     private Integer idMascota;
 
-    public Reportes(String tipo, LocalDate fecha, String direccion, String estado, String idUduario, int idMascota) {
+    public Reporte(String tipo, LocalDate fecha, String direccion, String estado, String idUduario, int idMascota) {
         this.tipo = tipo;
         this.fecha = fecha;
         this.direccion = direccion;
@@ -26,7 +26,7 @@ public class Reportes {
         this.idMascota = idMascota;
     }
     
-    public Reportes(){
+    public Reporte(){
         
     }
 
