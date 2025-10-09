@@ -19,7 +19,7 @@
         <h3>Datos de mi mascota</h3>   
         <!-- Pendiente implementar envíod e imagen -->
         Pendiente implementar envío de imagen
-        <form action="ReporteServlet" method="post" enctype="form-data">
+        <form action="BuscarServlet" method="post" enctype="form-data">
             <label for="nombre">Nombre:</label>
             <input type="text" id="nombre" name="nombre" required>
             
@@ -33,7 +33,7 @@
             <input type="text" id="color" name="color" required>
             
             <label for="edad">Edad:</label>
-            <input type="text" id="edad" name="edad" required>
+            <input type="number" id="edad" name="edad" step="1" required>
             
             <label for="tamanio">Tamaño:</label>
             <select id="tamanio" name="tamanio" required>

@@ -64,11 +64,8 @@ public class BuscarServlet extends HttpServlet {
         response.getWriter().println("Se ha registrado correctamente");
          */
         Mascota mascota = new Mascota(nombre, especie, raza, color, edad, tamanio, descripcion, color);
-
-        if (MascotaDao.registrar(mascota) > 0) {
-
-            int idMascota = MascotaDao.registrar(mascota);
-
+        int idMascota = MascotaDao.registrar(mascota);
+        if (idMascota > 0) {
             Reporte reporte = new Reporte("Busqueda", LocalDate.now(), direccion, "Pendiente", idUsuario, idMascota);
             if (ReporteDao.registrar(reporte) > 0) {
                 request.setAttribute("mensaje", "Registro exitoso");
@@ -79,8 +76,6 @@ public class BuscarServlet extends HttpServlet {
             request.setAttribute("mensaje", "Error al intentar registrar los datos de la mascota");
         }
         RequestDispatcher rd = request.getRequestDispatcher("buscar.jsp");
-        rd.forward(request, response);        
-     
+        rd.forward(request, response);
     }
-
 }

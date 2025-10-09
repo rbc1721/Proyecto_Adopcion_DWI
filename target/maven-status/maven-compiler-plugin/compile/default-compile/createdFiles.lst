@@ -1,4 +1,3 @@
-com\proyecto\adopcion\App.class
 dao\ReporteDao.class
 controlador\BuscarServlet.class
 modelo\Mascota.class
