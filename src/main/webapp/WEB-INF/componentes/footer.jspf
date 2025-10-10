@@ -1,0 +1,18 @@
+
+<%@ page pageEncoding="UTF-8" %>
+
+<footer class="bg-dark text-light mt-5 py-4 d-flex justify-content-center align-items-center">
+  <div class="container text-center">
+    <p class="mb-1">
+      &copy; <%= java.time.Year.now() %> Rastreando Huellitas 🐾 — Todos los derechos reservados.
+    </p>
+    <p class="small text-secondary">
+      Proyecto académico
+    </p>
+    <div class="mt-2">
+      <a href="#" class="text-light me-3"><i class="bi bi-facebook"></i></a>
+      <a href="#" class="text-light me-3"><i class="bi bi-instagram"></i></a>
+      <a href="#" class="text-light me-3"><i class="bi bi-twitter-x"></i></a>
+    </div>
+  </div>
+</footer>
