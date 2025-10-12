@@ -12,12 +12,10 @@ import modelo.Mascota;
 public class MascotaDao {
 
     public static Integer registrar(Mascota mascota) {
-        int idMascota = -1; 
+        int idMascota = -1;
         String sql = "INSERT INTO mascotas(nombre, especie, raza, color, edad, tamanio, descripcion, foto) VALUES(?,?,?,?,?,?,?,?)";
-        
-        try {
-            Connection conexion = Conexion.getInstancia().getConexion();
-            PreparedStatement ps = conexion.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+
+        try (Connection conexion = Conexion.getInstancia().getConexion(); PreparedStatement ps = conexion.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);) {
 
             ps.setString(1, mascota.getNombre());
             ps.setString(2, mascota.getEspecie());
@@ -28,9 +26,9 @@ public class MascotaDao {
             ps.setString(7, mascota.getDescripcion());
             ps.setString(8, mascota.getFoto());
 
-            if(ps.executeUpdate() > 0){
-                ResultSet rs = ps.getGeneratedKeys();               
-                if(rs.next()){
+            if (ps.executeUpdate() > 0) {
+                ResultSet rs = ps.getGeneratedKeys();
+                if (rs.next()) {
                     idMascota = rs.getInt(1);
                 }
             }
@@ -41,32 +39,31 @@ public class MascotaDao {
             e.getMessage();
         }
         return idMascota;
-    }  
+    }
 
     public static Mascota obtener(int idMascota) {
         Mascota mascota = null;
         String sql = "SELECT * FROM mascotas WHERE idMascota = ?";
 
-        try {
-            Connection conexion = Conexion.getInstancia().getConexion();
-            PreparedStatement ps = conexion.prepareCall(sql);
-            ResultSet datos = ps.executeQuery();
-            
+        try (Connection conexion = Conexion.getInstancia().getConexion(); PreparedStatement ps = conexion.prepareCall(sql);) {
+
             ps.setInt(1, idMascota);
+            ResultSet datos = ps.executeQuery();
+
             mascota = new Mascota();
-            
-            while (datos.next()) {         
+
+            while (datos.next()) {
 
                 mascota.setIdMascota(datos.getInt("idMascota"));
                 mascota.setNombre(datos.getString("nombre"));
                 mascota.setEspecie(datos.getString("especie"));
-                mascota.setRaza(datos.getString("raza"));           
+                mascota.setRaza(datos.getString("raza"));
                 mascota.setColor(datos.getString("color"));
                 mascota.setEdad(datos.getInt("edad"));
                 mascota.setTamanio(datos.getString("tamanio"));
-                mascota.setDescripcion(datos.getString("descripcion"));              
-            }          
-            
+                mascota.setDescripcion(datos.getString("descripcion"));
+            }
+
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -115,5 +112,5 @@ public class MascotaDao {
         }
         return mascotas;
     }
-*/
+     */
 }

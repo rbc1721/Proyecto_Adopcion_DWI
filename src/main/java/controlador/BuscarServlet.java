@@ -1,8 +1,9 @@
 package controlador;
 
+import apoyo.MostrarDatos;
 import dao.MascotaDao;
 import dao.ReporteDao;
-import externalServices.FileManagement;
+import serviciosExternos.GestionImagenes;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.*;
@@ -13,7 +14,9 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.Part;
 import java.io.File;
 import java.time.LocalDate;
+import java.util.List;
 import modelo.Mascota;
+import modelo.MascotaEncontrada;
 import modelo.Reporte;
 
 /**
@@ -37,6 +40,18 @@ public class BuscarServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
+
+        request.setCharacterEncoding("UTF-8");
+        response.setCharacterEncoding("UTF-8");
+
+        List<Reporte> lista = ReporteDao.obtener("Encontrado", "pendiente");
+        List<MascotaEncontrada> listaReportes = MostrarDatos.MostrarMascotaEncontradas(lista);
+
+        request.setAttribute("listaReportes", listaReportes);
+
+        RequestDispatcher rd = request.getRequestDispatcher("/buscar.jsp");
+        rd.forward(request, response);
+
     }
 
     @Override
@@ -60,7 +75,7 @@ public class BuscarServlet extends HttpServlet {
             return;
         }
 
-        String url = FileManagement.enviarFoto(archivo);
+        String url = GestionImagenes.enviarFoto(archivo);
         if (url == null) {
             response.sendRedirect("buscar.jsp?msg=Error+al+subir+la+imagen");
             return;

@@ -105,7 +105,7 @@
             </div>
 
             <div class="container-fluid mt-4  px-5 py-3">
-                <h3 class="p-2">Buscar Mascota</h3>
+                <h3 class="p-2">Mascotas Encontradas</h3>
                 <div class="row">                      
                     <aside class="col-md-3 col-lg-2 bg-light p-3 rounded-3 card shadow-sm fondo" >
                         <h5 class="fw-bold mb-3">Filtrar Mascotas</h5>

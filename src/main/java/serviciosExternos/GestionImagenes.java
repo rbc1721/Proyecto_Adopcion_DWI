@@ -1,4 +1,4 @@
-package externalServices;
+package serviciosExternos;
 
 import jakarta.servlet.http.Part;
 import java.io.IOException;
@@ -13,7 +13,7 @@ import org.json.JSONObject;
  *
  * @author Eduardo
  */
-public class FileManagement {
+public class GestionImagenes {
 
     private static final String API_KEY = "00046b32493d66f1f80fd28ccedf07ff";
     private static final String UPLOAD_URL = "https://thumbsnap.com/api/upload";
