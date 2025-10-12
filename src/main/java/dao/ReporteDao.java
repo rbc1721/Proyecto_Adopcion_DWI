@@ -24,7 +24,7 @@ public class ReporteDao {
             ps.setDate(2, java.sql.Date.valueOf(reporte.getFecha()));
             ps.setString(3, reporte.getDireccion());
             ps.setString(4, reporte.getEstado());
-            ps.setString(5, reporte.getIdUduario());
+            ps.setString(5, reporte.getIdUsuario());
             if (reporte.getIdMascota() != null) {
                 ps.setInt(6, reporte.getIdMascota());
             } else {

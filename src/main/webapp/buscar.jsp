@@ -31,16 +31,21 @@
             }
 
             .glass-card {
-                background: rgba(255, 255, 255, 0.2); 
-                backdrop-filter: blur(10px);          
-                -webkit-backdrop-filter: blur(10px);  
+                background: rgba(255, 255, 255, 0.2);
+                backdrop-filter: blur(10px);
+                -webkit-backdrop-filter: blur(10px);
                 border: 1px solid rgba(255, 255, 255, 0.3);
-                box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2); 
+                box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
             }
-            
+            /*
+                .card-img-top {
+                    height: 180px;
+                    object-fit: cover;
+                }
+            */
             body{
                 background-color: #ecdbd1;
-            
+
             }
         </style>
 
@@ -142,18 +147,18 @@
 
                     </aside>
 
-                    <main class="col-md-9 col-lg-10">
+                    <div class="col-md-9 col-lg-10">
                         <div class="row" id="galeria">
                             <div class="row row-cols-1 row-cols-md-3 g-4">
-                                <c:forEach var="mascota" items="${listaMascotas}">
+                                <c:forEach var="mascotaEncontrada" items="${listaReportes}">
                                     <div class="col">
                                         <div class="card shadow-sm h-100">
-                                            <img src="${mascota.imagen}" class="card-img-top" alt="Mascota">
+                                            <img src="${mascotaEncontrada.foto}" class="card-img-top" alt="Mascota" loading="lazy" onerror="this.src='https://via.placeholder.com/300x200?text=Sin+imagen';">
                                             <div class="card-body">
-                                                <h5 class="card-title">${mascota.nombre}</h5>
+                                                <h5 class="card-title">${mascotaEncontrada.especie}</h5>
                                                 <p class="card-text text-muted">
-                                                    ${mascota.tipo} - ${mascota.tamano}<br>
-                                                    Zona: ${mascota.distrito}
+                                                    ${mascotaEncontrada.raza} - ${mascotaEncontrada.tamanio}<br>
+                                                    Zona: ${mascotaEncontrada.direccion}
                                                 </p>
                                             </div>
                                         </div>
@@ -162,7 +167,7 @@
                             </div>
 
                         </div>
-                    </main>
+                    </div>
 
                 </div>
             </div>

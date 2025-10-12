@@ -12,7 +12,7 @@ public class Conexion {
     private static final String host = "rastreando-huellitas-rastreando-huellitas.g.aivencloud.com";
     private static final String port = "17573";
     private static final String db = "rastreando_huellitas";
-        private static final String user = "";
+    private static final String user = "";
     private static final String pass = "";   
     private static final String url = "";
 

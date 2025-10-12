@@ -120,7 +120,5 @@ public class MascotaEncontrada {
 
     public void setFoto(String foto) {
         this.foto = foto;
-    }
-    
-    
+    }      
 }

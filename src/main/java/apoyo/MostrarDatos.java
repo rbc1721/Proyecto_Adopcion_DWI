@@ -20,7 +20,7 @@ public class MostrarDatos {
             int idMascota = reporte.getIdMascota();
             
             Mascota mascota = MascotaDao.obtener(idMascota);
-            MascotaEncontrada me = new MascotaEncontrada(reporte.getCodigo(), reporte.getFecha(), reporte.getDireccion(), reporte.getIdUduario(), idMascota, mascota.getEspecie(), mascota.getRaza(), mascota.getColor(), mascota.getTamanio(),mascota.getDescripcion(), mascota.getFoto());
+            MascotaEncontrada me = new MascotaEncontrada(reporte.getCodigo(), reporte.getFecha(), reporte.getDireccion(), reporte.getIdUsuario(), idMascota, mascota.getEspecie(), mascota.getRaza(), mascota.getColor(), mascota.getTamanio(),mascota.getDescripcion(), mascota.getFoto());
             lista.add(me);
         }       
         return lista;
