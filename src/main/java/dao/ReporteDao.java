@@ -17,9 +17,7 @@ import modelo.Reporte;
  */
 public class ReporteDao {    
     
-    public static int registrar(Reporte reporte){
-        
-        System.out.println("Estoy tratando de registrar el reporte");
+    public static int registrar(Reporte reporte){ 
         int codigo = -1;
         String sql = "INSERT INTO reportes(tipo, fecha, direccion, estado, idUsuario, idMascota) VALUES(?,?,?,?,?,?)";
         try {

@@ -12,7 +12,6 @@ import modelo.Mascota;
 public class MascotaDao {
 
     public static Integer registrar(Mascota mascota) {
-        System.out.println("Estoy tratando de registrar la mascota");
         int idMascota = -1; 
         String sql = "INSERT INTO mascotas(nombre, especie, raza, color, edad, tamanio, descripcion, foto) VALUES(?,?,?,?,?,?,?,?)";
         
