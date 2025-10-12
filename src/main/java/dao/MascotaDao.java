@@ -4,6 +4,7 @@ import config.Conexion;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
@@ -35,7 +36,6 @@ public class MascotaDao {
             return idMascota;
 
         } catch (Exception e) {
-            e.printStackTrace();
             e.getMessage();
         }
         return idMascota;
@@ -64,8 +64,7 @@ public class MascotaDao {
                 mascota.setDescripcion(datos.getString("descripcion"));
             }
 
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (Exception e){
         }
         return mascota;
     }
@@ -113,4 +112,35 @@ public class MascotaDao {
         return mascotas;
     }
      */
+    public static Integer reportarMascotaPerdida(Mascota mascota) {
+    System.out.println("Intentando registrar mascota perdida...");
+    int idMascota = -1;
+    String sql = "INSERT INTO mascotas_perdidas(nombre, especie, raza, color, edad, tamanio, descripcion, foto) VALUES(?,?,?,?,?,?,?,?)";
+
+    try {
+        Connection conexion = Conexion.getInstancia().getConexion();
+        PreparedStatement ps = conexion.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+
+        ps.setString(1, mascota.getNombre());
+        ps.setString(2, mascota.getEspecie());
+        ps.setString(3, mascota.getRaza());
+        ps.setString(4, mascota.getColor());
+        ps.setInt(5, mascota.getEdad());
+        ps.setString(6, mascota.getTamanio());
+        ps.setString(7, mascota.getDescripcion());
+        ps.setString(8, mascota.getFoto());
+
+        if (ps.executeUpdate() > 0) {
+            ResultSet rs = ps.getGeneratedKeys();
+            if (rs.next()) {
+                idMascota = rs.getInt(1);
+            }
+        }
+        return idMascota;
+
+    } catch (ClassNotFoundException | SQLException e) {
+        System.out.println("❌ Error al reportar mascota perdida: " + e.getMessage());
+    }
+    return idMascota;
+}
 }
