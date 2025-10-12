@@ -1,7 +1,9 @@
+modelo\MascotaEncontrada.class
 dao\ReporteDao.class
 controlador\BuscarServlet.class
 modelo\Mascota.class
+serviciosExternos\GestionImagenes.class
+apoyo\MostrarDatos.class
 dao\MascotaDao.class
 config\Conexion.class
-externalServices\FileManagement.class
 modelo\Reporte.class
