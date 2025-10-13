@@ -1,9 +1,14 @@
 D:\0)Inicio\Estudio\UTP\Web Integrado\WEB-10_10\Proyecto_Adopcion_DWI\src\main\java\config\Conexion.java
 D:\0)Inicio\Estudio\UTP\Web Integrado\WEB-10_10\Proyecto_Adopcion_DWI\src\main\java\dao\ReporteDao.java
-D:\0)Inicio\Estudio\UTP\Web Integrado\WEB-10_10\Proyecto_Adopcion_DWI\src\main\java\dao\MascotaDao.java
-D:\0)Inicio\Estudio\UTP\Web Integrado\WEB-10_10\Proyecto_Adopcion_DWI\src\main\java\apoyo\MostrarDatos.java
 D:\0)Inicio\Estudio\UTP\Web Integrado\WEB-10_10\Proyecto_Adopcion_DWI\src\main\java\modelo\Reporte.java
 D:\0)Inicio\Estudio\UTP\Web Integrado\WEB-10_10\Proyecto_Adopcion_DWI\src\main\java\serviciosExternos\GestionImagenes.java
 D:\0)Inicio\Estudio\UTP\Web Integrado\WEB-10_10\Proyecto_Adopcion_DWI\src\main\java\modelo\MascotaEncontrada.java
 D:\0)Inicio\Estudio\UTP\Web Integrado\WEB-10_10\Proyecto_Adopcion_DWI\src\main\java\modelo\Mascota.java
 D:\0)Inicio\Estudio\UTP\Web Integrado\WEB-10_10\Proyecto_Adopcion_DWI\src\main\java\controlador\BuscarServlet.java
+D:\0)Inicio\Estudio\UTP\Web Integrado\WEB-10_10\Proyecto_Adopcion_DWI\src\main\java\modelo\Usuario.java
+D:\0)Inicio\Estudio\UTP\Web Integrado\WEB-10_10\Proyecto_Adopcion_DWI\src\main\java\dao\MascotaDao.java
+D:\0)Inicio\Estudio\UTP\Web Integrado\WEB-10_10\Proyecto_Adopcion_DWI\src\main\java\apoyo\MostrarDatos.java
+D:\0)Inicio\Estudio\UTP\Web Integrado\WEB-10_10\Proyecto_Adopcion_DWI\src\main\java\dao\UsuarioDao.java
+D:\0)Inicio\Estudio\UTP\Web Integrado\WEB-10_10\Proyecto_Adopcion_DWI\src\main\java\controlador\RegistrarUsuarioServlet.java
+D:\0)Inicio\Estudio\UTP\Web Integrado\WEB-10_10\Proyecto_Adopcion_DWI\src\main\java\controlador\LoginServlet.java
+D:\0)Inicio\Estudio\UTP\Web Integrado\WEB-10_10\Proyecto_Adopcion_DWI\src\main\java\modelo\Persona.java

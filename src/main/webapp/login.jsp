@@ -1,4 +1,5 @@
 <%@ page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -28,6 +29,11 @@
             </div>
             <button type="submit" class="btn btn-primary">Entrar</button>
         </form>
+        <c:if test="${param.error == '1'}">
+            <div class="alert alert-danger mt-3" role="alert">
+                Usuario o contraseña incorrectos.
+            </div>
+        </c:if>
         <p class="mt-3">
             ¿No tienes una cuenta? <a href="registro.jsp">Regístrate aquí</a>
         </p>

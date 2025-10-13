@@ -1,4 +1,5 @@
 <%@ page contentType="text/html" pageEncoding="UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -15,9 +16,18 @@
 
 <!-- Contenido principal -->
 <main class="container py-5">
-    <form action="ProcesarRegistroServlet" method="post" class="form-container">
+    <form action="RegistrarUsuarioServlet" method="post" class="form-container">
         <h2 class="mb-4">Registro de Usuario</h2>
-
+        <c:if test="${param.msg == 'registro_ok'}">
+        <div class="alert alert-success" role="alert">
+        ¡Registro exitoso! Ahora puedes <a href="login.jsp" class="alert-link">iniciar sesión</a>.
+        </div>
+        </c:if>
+        <c:if test="${param.msg == 'error'}">
+            <div class="alert alert-danger" role="alert">
+                Ocurrió un error durante el registro. Intenta nuevamente.
+            </div>
+        </c:if>
         <div class="mb-3">
             <label for="nombres" class="form-label">Nombres</label>
             <input type="text" class="form-control" id="nombres" name="nombres" required />
@@ -25,18 +35,18 @@
         <div class="mb-3">
             <label for="apellidos" class="form-label">Apellidos</label>
             <input type="text" class="form-control" id="apellidos" name="apellidos" required />
+        </div>     
+        <div class="mb-3">
+            <label for="direccion" class="form-label">Dirección</label>
+            <input type="text" class="form-control" id="direccion" name="direccion" required />
         </div>
         <div class="mb-3">
             <label for="correo" class="form-label">Correo electrónico</label>
             <input type="email" class="form-control" id="correo" name="correo" required />
         </div>
         <div class="mb-3">
-            <label for="direccion" class="form-label">Dirección</label>
-            <input type="text" class="form-control" id="direccion" name="direccion" required />
-        </div>
-        <div class="mb-3">
-            <label for="telefono" class="form-label">Teléfono</label>
-            <input type="tel" class="form-control" id="telefono" name="telefono" required />
+            <label for="contrasenia" class="form-label">Contraseña</label>
+            <input type="password" class="form-control" id="contrasenia" name="contrasenia" required />
         </div>
         <div class="mb-3">
             <label for="rol" class="form-label">Rol</label>
