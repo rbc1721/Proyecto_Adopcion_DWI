@@ -12,7 +12,7 @@
                 margin: 0;
                 padding: 0;
             }
-            .container {
+            .containerForm {
                 width: 50%;
                 margin: 40px auto;
                 background: #fff;
@@ -59,7 +59,7 @@
         <!-- Header -->
         <%@ include file="WEB-INF/componentes/header.jspf"%>
         <!-- Header -->
-        <div class="container">
+        <div class="containerForm">
             <h1>🐾 Reportar Mascota Perdida</h1>
             <form action="MascotaServlet" method="post" enctype="multipart/form-data">
                 <label>Nombre (si lo sabe):</label>

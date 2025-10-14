@@ -81,7 +81,7 @@ public class BuscarServlet extends HttpServlet {
                 return;
             }
 
-            if (archivo.getSize() > 50 * 1024) {
+            if (archivo.getSize() > 1024 * 1024) {
                 response.sendRedirect("buscar.jsp?msg=La+foto+excede+los+50+kb");
                 return;
             }
