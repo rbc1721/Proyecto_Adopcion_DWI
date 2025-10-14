@@ -94,7 +94,7 @@ public class BuscarServlet extends HttpServlet {
 
             /*
             //Guardar la imagen en el directorio temporal local
-            String carpetaDestino = getServletContext().getRealPath("/data");
+            String carpetaDestino = pageContext.request.contextPath/recursos/;
 
             System.out.println("La carpeta de destino es: " + carpetaDestino);
 
@@ -111,13 +111,14 @@ public class BuscarServlet extends HttpServlet {
                 response.sendRedirect("buscar.jsp?msg=Error+al+registrar+los+datos+de+la+mascota");
                 return;
             }
-            Reporte reporte = new Reporte("Busqueda", LocalDate.now(), direccion, "Pendiente", idUsuario, idMascota);
+            Reporte reporte = new Reporte("Buscando", LocalDate.now(), direccion, "Pendiente", idUsuario, idMascota);
             if (ReporteDao.registrar(reporte) < 1) {
                 response.sendRedirect("buscar.jsp?msg=Error+al+registrar+el+reporte");
                 return;
             }
             response.sendRedirect("buscar.jsp?msg=Registro+exitoso");
         } catch (Exception e) {
+            System.out.println(e.getMessage());
             e.printStackTrace();
             response.sendRedirect("buscar.jsp?msg=Ocurrio+un+error+inesperado");
         }

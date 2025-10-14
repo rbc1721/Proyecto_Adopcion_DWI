@@ -2,9 +2,11 @@
     Document   : buscar2
     Created on : 7 oct. 2025, 9:30:49 p. m.
     Author     : Eduardo Olea
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 --%>
 
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
+<%@ taglib prefix="c" uri="jakarta.tags.core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <!DOCTYPE html>
@@ -81,7 +83,7 @@
                         <select id="tamanio" name="tamanio" class="form-select" required>
                             <option value="" disabled selected>Seleccione</option>
                             <option value="MuyPequenio">Muy Pequeño</option>
-                            <option value="Pequenio">Pequeño</option>
+                            <option value="Pequeño">Pequeño</option>
                             <option value="Mediano">Mediano</option>
                             <option value="Grande">Grande</option>
                             <option value="MuyGrande">Muy Grande</option>
@@ -129,7 +131,7 @@
                                 <select class="form-select" name="tamanio">
                                     <option value="">Cualquiera</option>
                                     <option value="MuyPequenio">Muy Pequeño</option>
-                                    <option value="Pequenio">Pequeño</option>
+                                    <option value="Pequeño">Pequeño</option>
                                     <option value="Mediano">Mediano</option>
                                     <option value="Grande">Grande</option>
                                     <option value="MuyGrande">Muy Grande</option>
@@ -141,7 +143,7 @@
                                 <input type="text" class="form-control" name="distrito" placeholder="Ej. Miraflores">
                             </div>
 
-                            <button type="submit" class="btn btn-primary w-100">Aplicar Filtros</button>
+                            <button type="submit" class="btn btn-primary w-100">Buscar</button>
 
                         </form>
 
@@ -151,16 +153,17 @@
                         <div class="row" id="galeria">
                             <div class="row row-cols-1 row-cols-md-3 g-4">
                                 <c:forEach var="mascotaEncontrada" items="${listaReportes}">
-                                    <div class="col">
+                                    <div class="col col-lg-2 col-md-3 cool-sm6 h-80">
                                         <div class="card shadow-sm h-100">
-                                            <img src="${mascotaEncontrada.foto}" class="card-img-top" alt="Mascota" loading="lazy" onerror="this.src='https://via.placeholder.com/300x200?text=Sin+imagen';">
+                                            <img src="${mascotaEncontrada.foto}" class="card-img-top" alt="Mascota" loading="lazy" onerror="this.onerror=null; this.src='https://placehold.co/300x200?text=Sin+imagen';">
+                  
                                             <div class="card-body">
                                                 <h5 class="card-title">${mascotaEncontrada.especie}</h5>
                                                 <p class="card-text text-muted">
                                                     ${mascotaEncontrada.raza} - ${mascotaEncontrada.tamanio}<br>
                                                     Zona: ${mascotaEncontrada.direccion}
-                                                </p>
-                                            </div>
+                                                </p>      
+                                            </div>                                    
                                         </div>
                                     </div>
                                 </c:forEach>

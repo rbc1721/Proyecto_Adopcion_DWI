@@ -71,7 +71,8 @@ public class GestionImagenes {
         JSONObject obj = new JSONObject(respJson);
 
         if (obj.optBoolean("success", false)) {
-            return obj.getJSONObject("data").getString("media");
+            JSONObject data = obj.getJSONObject("data");             
+            return  data.getString("media") + "jpg";           
         } else {
             System.err.println("Error en subida: " + respJson);
             return null;

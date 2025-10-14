@@ -18,7 +18,9 @@ public class ReporteDao {
     public static int registrar(Reporte reporte) {
         int codigo = -1;
         String sql = "INSERT INTO reportes(tipo, fecha, direccion, estado, idUsuario, idMascota) VALUES(?,?,?,?,?,?)";
-        try (Connection conexion = Conexion.getInstancia().getConexion(); PreparedStatement ps = conexion.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);) {
+        try {
+            Connection conexion = Conexion.getInstancia().getConexion();
+            PreparedStatement ps = conexion.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 
             ps.setString(1, reporte.getTipo());
             ps.setDate(2, java.sql.Date.valueOf(reporte.getFecha()));
@@ -50,7 +52,9 @@ public class ReporteDao {
         List<Reporte> reportes = new ArrayList<>();
         String sql = "SELECT * FROM reportes WHERE tipo = ? AND estado = ?";
 
-        try (Connection conexion = Conexion.getInstancia().getConexion(); PreparedStatement ps = conexion.prepareCall(sql);) {
+        try {
+            Connection conexion = Conexion.getInstancia().getConexion();
+            PreparedStatement ps = conexion.prepareCall(sql);
 
             ps.setString(1, tipo);
             ps.setString(2, estado);
@@ -78,7 +82,9 @@ public class ReporteDao {
     public static boolean actualizar(Reporte reporte) {
         String sql = "UPDATE reportes SET estado = ? WHERE idReporte = ? ";
 
-        try (Connection conexion = Conexion.getInstancia().getConexion(); PreparedStatement ps = conexion.prepareStatement(sql);) {
+        try {
+            Connection conexion = Conexion.getInstancia().getConexion();
+            PreparedStatement ps = conexion.prepareStatement(sql);
 
             ps.setString(5, reporte.getEstado());
             ps.setInt(7, reporte.getIdMascota());

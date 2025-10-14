@@ -16,7 +16,9 @@ public class MascotaDao {
         int idMascota = -1;
         String sql = "INSERT INTO mascotas(nombre, especie, raza, color, edad, tamanio, descripcion, foto) VALUES(?,?,?,?,?,?,?,?)";
 
-        try (Connection conexion = Conexion.getInstancia().getConexion(); PreparedStatement ps = conexion.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);) {
+        try {
+            Connection conexion = Conexion.getInstancia().getConexion();
+            PreparedStatement ps = conexion.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 
             ps.setString(1, mascota.getNombre());
             ps.setString(2, mascota.getEspecie());
@@ -26,7 +28,7 @@ public class MascotaDao {
             ps.setString(6, mascota.getTamanio());
             ps.setString(7, mascota.getDescripcion());
             ps.setString(8, mascota.getFoto());
-
+            
             if (ps.executeUpdate() > 0) {
                 ResultSet rs = ps.getGeneratedKeys();
                 if (rs.next()) {
@@ -45,7 +47,9 @@ public class MascotaDao {
         Mascota mascota = null;
         String sql = "SELECT * FROM mascotas WHERE idMascota = ?";
 
-        try (Connection conexion = Conexion.getInstancia().getConexion(); PreparedStatement ps = conexion.prepareCall(sql);) {
+        try {
+            Connection conexion = Conexion.getInstancia().getConexion();
+            PreparedStatement ps = conexion.prepareCall(sql);
 
             ps.setInt(1, idMascota);
             ResultSet datos = ps.executeQuery();
@@ -62,12 +66,14 @@ public class MascotaDao {
                 mascota.setEdad(datos.getInt("edad"));
                 mascota.setTamanio(datos.getString("tamanio"));
                 mascota.setDescripcion(datos.getString("descripcion"));
+                mascota.setFoto(datos.getString("foto"));
             }
 
-        } catch (Exception e){
+        } catch (Exception e) {
         }
         return mascota;
     }
+
     /*
     public static boolean actualizar(Mascota mascota) {
         String sql = "UPDATE mascotas SET estado = ? WHERE idMascota = ? ";
@@ -113,34 +119,34 @@ public class MascotaDao {
     }
      */
     public static Integer reportarMascotaPerdida(Mascota mascota) {
-    System.out.println("Intentando registrar mascota perdida...");
-    int idMascota = -1;
-    String sql = "INSERT INTO mascotas_perdidas(nombre, especie, raza, color, edad, tamanio, descripcion, foto) VALUES(?,?,?,?,?,?,?,?)";
+        System.out.println("Intentando registrar mascota perdida...");
+        int idMascota = -1;
+        String sql = "INSERT INTO mascotas_perdidas(nombre, especie, raza, color, edad, tamanio, descripcion, foto) VALUES(?,?,?,?,?,?,?,?)";
 
-    try {
-        Connection conexion = Conexion.getInstancia().getConexion();
-        PreparedStatement ps = conexion.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+        try {
+            Connection conexion = Conexion.getInstancia().getConexion();
+            PreparedStatement ps = conexion.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 
-        ps.setString(1, mascota.getNombre());
-        ps.setString(2, mascota.getEspecie());
-        ps.setString(3, mascota.getRaza());
-        ps.setString(4, mascota.getColor());
-        ps.setInt(5, mascota.getEdad());
-        ps.setString(6, mascota.getTamanio());
-        ps.setString(7, mascota.getDescripcion());
-        ps.setString(8, mascota.getFoto());
+            ps.setString(1, mascota.getNombre());
+            ps.setString(2, mascota.getEspecie());
+            ps.setString(3, mascota.getRaza());
+            ps.setString(4, mascota.getColor());
+            ps.setInt(5, mascota.getEdad());
+            ps.setString(6, mascota.getTamanio());
+            ps.setString(7, mascota.getDescripcion());
+            ps.setString(8, mascota.getFoto());
 
-        if (ps.executeUpdate() > 0) {
-            ResultSet rs = ps.getGeneratedKeys();
-            if (rs.next()) {
-                idMascota = rs.getInt(1);
+            if (ps.executeUpdate() > 0) {
+                ResultSet rs = ps.getGeneratedKeys();
+                if (rs.next()) {
+                    idMascota = rs.getInt(1);
+                }
             }
+            return idMascota;
+
+        } catch (ClassNotFoundException | SQLException e) {
+            System.out.println("❌ Error al reportar mascota perdida: " + e.getMessage());
         }
         return idMascota;
-
-    } catch (ClassNotFoundException | SQLException e) {
-        System.out.println("❌ Error al reportar mascota perdida: " + e.getMessage());
     }
-    return idMascota;
-}
 }
