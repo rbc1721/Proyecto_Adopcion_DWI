@@ -18,7 +18,7 @@
             <meta name="viewport" content="width=device-width, initial-scale=1">
             <!-- Bootstrap 5 -->
             <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-
+            <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet"/>
             <style>
                 .hero {
                     background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)),
@@ -62,10 +62,7 @@
 
             <!-- Footer -->
             <%@ include file="WEB-INF/componentes/footer.jspf"%>
-            <!-- Footer -->
-
-            <!-- Bootstrap JS -->
-            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+            <!-- Footer -->           
 
         </body>
     </html>

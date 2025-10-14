@@ -1,9 +1,14 @@
 modelo\MascotaEncontrada.class
-dao\ReporteDao.class
 controlador\BuscarServlet.class
+apoyo\MostrarDatos.class
+config\Conexion.class
+controlador\RegistrarUsuarioServlet.class
+dao\ReporteDao.class
+dao\UsuarioDao.class
+modelo\Persona.class
 modelo\Mascota.class
 serviciosExternos\GestionImagenes.class
-apoyo\MostrarDatos.class
 dao\MascotaDao.class
-config\Conexion.class
+modelo\Usuario.class
 modelo\Reporte.class
+controlador\LoginServlet.class
