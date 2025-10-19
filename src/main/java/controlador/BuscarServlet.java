@@ -92,7 +92,7 @@ public class BuscarServlet extends HttpServlet {
                 return;
             }
 
-            /*
+            /*|||||||       
             //Guardar la imagen en el directorio temporal local
             String carpetaDestino = pageContext.request.contextPath/recursos/;
 
