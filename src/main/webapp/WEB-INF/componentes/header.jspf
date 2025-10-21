@@ -18,15 +18,15 @@
                     <li class="nav-item"><a class="nav-link" href="buscar.jsp">Buscar Mascota</a></li>
                     <li class="nav-item"><a class="nav-link" href="reportarMascota.jsp">Encontre una Mascota</a></li>
                     <li class="nav-item"><a class="nav-link" href="#">Como funciona</a></li>
-                      <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="accountDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              <i class="bi bi-person me-1"></i> Cuenta
-            </a>
-            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="accountDropdown">
-              <li><a class="dropdown-item" href="login.jsp"><i class="bi bi-box-arrow-in-right me-1"></i> Iniciar Sesión</a></li>
-              <li><a class="dropdown-item" href="registro.jsp"><i class="bi bi-person-plus me-1"></i> Registrarse</a></li>
-            </ul>
-          </li>    
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="accountDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="bi bi-person me-1"></i> Cuenta
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="accountDropdown">
+                            <li><a class="dropdown-item" href="login.jsp"><i class="bi bi-box-arrow-in-right me-1"></i> Iniciar Sesión</a></li>
+                            <li><a class="dropdown-item" href="registro.jsp"><i class="bi bi-person-plus me-1"></i> Registrarse</a></li>
+                        </ul>
+                    </li>    
                 </ul>
             </div>
         </div>

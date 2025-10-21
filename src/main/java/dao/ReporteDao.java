@@ -57,7 +57,7 @@ public class ReporteDao {
             PreparedStatement ps = conexion.prepareCall(sql);
 
             ps.setString(1, tipo);
-            ps.setString(2, estado);
+            ps.setString(2, estado);      
             ResultSet datos = ps.executeQuery();
 
             while (datos.next()) {

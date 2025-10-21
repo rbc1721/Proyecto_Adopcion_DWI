@@ -1,4 +1,3 @@
-
 package apoyo;
 
 import dao.MascotaDao;
@@ -13,16 +12,19 @@ import modelo.Reporte;
  * @author Eduardo
  */
 public class MostrarDatos {
-    public static List<MascotaEncontrada>MostrarMascotaEncontradas(List<Reporte> reportes){
+
+    public static List<MascotaEncontrada> MostrarMascotaEncontradas(List<Reporte> reportes, String especie) {
         List<MascotaEncontrada> lista = new ArrayList<>();
-        
+
         for (Reporte reporte : reportes) {
+
             int idMascota = reporte.getIdMascota();
-            
-            Mascota mascota = MascotaDao.obtener(idMascota);
-            MascotaEncontrada me = new MascotaEncontrada(reporte.getCodigo(), reporte.getFecha(), reporte.getDireccion(), reporte.getIdUsuario(), idMascota, mascota.getEspecie(), mascota.getRaza(), mascota.getColor(), mascota.getTamanio(),mascota.getDescripcion(), mascota.getFoto());
-            lista.add(me);
-        }       
+            Mascota mascota = MascotaDao.obtener(idMascota, especie);   
+     
+            if (mascota != null) {
+                MascotaEncontrada me = new MascotaEncontrada(reporte.getCodigo(), reporte.getFecha(), reporte.getDireccion(), reporte.getIdUsuario(), idMascota, mascota.getEspecie(), mascota.getRaza(), mascota.getColor(), mascota.getTamanio(), mascota.getDescripcion(), mascota.getFoto());
+                lista.add(me);
+            }        }
         return lista;
     }
 }

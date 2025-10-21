@@ -37,19 +37,21 @@ public class BuscarServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        // processRequest(request, response); 
+        //processRequest(request, response);
         request.setCharacterEncoding("UTF-8");
         response.setCharacterEncoding("UTF-8");
 
         try {
-            List<Reporte> lista = ReporteDao.obtener("Encontrado", "pendiente");
-            List<MascotaEncontrada> listaReportes = MostrarDatos.MostrarMascotaEncontradas(lista);
+            String especie = request.getParameter("especie");
 
-            if (listaReportes == null || listaReportes.isEmpty()) {
-                request.setAttribute("mensaje", "No se encontraron reportes disponibles");
-                return;
-            }
+            List<Reporte> lista = ReporteDao.obtener("Encontrado", "pendiente");
+           
+            List<MascotaEncontrada> listaReportes = MostrarDatos.MostrarMascotaEncontradas(lista, especie);
             request.setAttribute("listaReportes", listaReportes);
+ 
+            if (listaReportes == null || listaReportes.isEmpty()) {
+                request.setAttribute("mensaje", "No se encontraron reportes disponibles");             
+            }
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -73,7 +75,7 @@ public class BuscarServlet extends HttpServlet {
             String tamanio = request.getParameter("tamanio");
             String descripcion = request.getParameter("descripcion");
             String direccion = request.getParameter("direccion");
-            String idUsuario = "pepe";
+            String idUsuario = "1";
 
             Part archivo = request.getPart("foto");
             if (archivo == null || archivo.getSize() == 0) {
@@ -82,7 +84,7 @@ public class BuscarServlet extends HttpServlet {
             }
 
             if (archivo.getSize() > 1024 * 1024) {
-                response.sendRedirect("buscar.jsp?msg=La+foto+excede+los+50+kb");
+                response.sendRedirect("buscar.jsp?msg=La+foto+excede+1+MB");
                 return;
             }
 
@@ -92,7 +94,7 @@ public class BuscarServlet extends HttpServlet {
                 return;
             }
 
-            /*|||||||       
+            /*    
             //Guardar la imagen en el directorio temporal local
             String carpetaDestino = pageContext.request.contextPath/recursos/;
 

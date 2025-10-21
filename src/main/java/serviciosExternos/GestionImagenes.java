@@ -72,7 +72,7 @@ public class GestionImagenes {
 
         if (obj.optBoolean("success", false)) {
             JSONObject data = obj.getJSONObject("data");             
-            return  data.getString("media") + "jpg";           
+            return  data.getString("media");       
         } else {
             System.err.println("Error en subida: " + respJson);
             return null;

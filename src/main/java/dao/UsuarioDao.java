@@ -16,8 +16,8 @@ public class UsuarioDao {
 
     // REGISTRO
     public boolean registrarUsuario(Usuario usuario) {
-        String sqlPersona = "INSERT INTO persona (nombres, apellidos, direccion, rol) VALUES (?, ?, ?, ?)";
-        String sqlUsuario = "INSERT INTO usuario (contrasenia, idPersona) VALUES (?, ?)";
+        String sqlPersona = "INSERT INTO personas (nombres, apellidos, direccion, rol) VALUES (?, ?, ?, ?)";
+        String sqlUsuario = "INSERT INTO usuarios (contrasenia, idPersona) VALUES (?, ?)";
 
         try {
             Connection conn = Conexion.getInstancia().getConexion();

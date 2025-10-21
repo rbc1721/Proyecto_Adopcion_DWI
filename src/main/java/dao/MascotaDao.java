@@ -28,7 +28,7 @@ public class MascotaDao {
             ps.setString(6, mascota.getTamanio());
             ps.setString(7, mascota.getDescripcion());
             ps.setString(8, mascota.getFoto());
-            
+
             if (ps.executeUpdate() > 0) {
                 ResultSet rs = ps.getGeneratedKeys();
                 if (rs.next()) {
@@ -43,21 +43,20 @@ public class MascotaDao {
         return idMascota;
     }
 
-    public static Mascota obtener(int idMascota) {
+    public static Mascota obtener(int idMascota, String especie) {
         Mascota mascota = null;
-        String sql = "SELECT * FROM mascotas WHERE idMascota = ?";
+        String sql = "SELECT * FROM mascotas WHERE idMascota = ? AND especie=?";
 
         try {
             Connection conexion = Conexion.getInstancia().getConexion();
             PreparedStatement ps = conexion.prepareCall(sql);
 
             ps.setInt(1, idMascota);
+            ps.setString(2, especie);
             ResultSet datos = ps.executeQuery();
 
-            mascota = new Mascota();
-
             while (datos.next()) {
-
+                mascota = new Mascota();
                 mascota.setIdMascota(datos.getInt("idMascota"));
                 mascota.setNombre(datos.getString("nombre"));
                 mascota.setEspecie(datos.getString("especie"));
