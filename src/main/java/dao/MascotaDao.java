@@ -6,8 +6,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.ArrayList;
-import java.util.List;
 import modelo.Mascota;
 
 public class MascotaDao {
@@ -27,7 +25,7 @@ public class MascotaDao {
             ps.setInt(5, mascota.getEdad());
             ps.setString(6, mascota.getTamanio());
             ps.setString(7, mascota.getDescripcion());
-            ps.setString(8, mascota.getFoto());
+            ps.setBytes(8, mascota.getFoto());
 
             if (ps.executeUpdate() > 0) {
                 ResultSet rs = ps.getGeneratedKeys();
@@ -43,16 +41,17 @@ public class MascotaDao {
         return idMascota;
     }
 
-    public static Mascota obtener(int idMascota, String especie) {
+    public static Mascota obtener(int idMascota) {
+                
         Mascota mascota = null;
-        String sql = "SELECT * FROM mascotas WHERE idMascota = ? AND especie=?";
+        String sql = "SELECT * FROM mascotas WHERE idMascota = ?";
 
         try {
             Connection conexion = Conexion.getInstancia().getConexion();
             PreparedStatement ps = conexion.prepareCall(sql);
 
             ps.setInt(1, idMascota);
-            ps.setString(2, especie);
+          
             ResultSet datos = ps.executeQuery();
 
             while (datos.next()) {
@@ -65,14 +64,35 @@ public class MascotaDao {
                 mascota.setEdad(datos.getInt("edad"));
                 mascota.setTamanio(datos.getString("tamanio"));
                 mascota.setDescripcion(datos.getString("descripcion"));
-                mascota.setFoto(datos.getString("foto"));
+                //mascota.setFoto(datos.getBytes("foto"));                                
             }
-
+  
         } catch (Exception e) {
+            System.out.println("Ha ocurrido el siguiente error: " + e.getMessage());
         }
         return mascota;
     }
 
+    
+    public static byte[] obtenerFoto(int idMascota) {
+                        
+        String sql = "SELECT * FROM mascotas WHERE idMascota = ? ";
+        byte[] foto = null;
+        try {
+            Connection conexion = Conexion.getInstancia().getConexion();
+            PreparedStatement ps = conexion.prepareCall(sql);
+            ps.setInt(1, idMascota);
+       
+            ResultSet datos = ps.executeQuery();
+            while (datos.next()) {     
+                foto = datos.getBytes("foto");                                
+            }
+  
+        } catch (Exception e) {
+            System.out.println("Ha ocurrido el siguiente error: " + e.getMessage());
+        }
+        return foto;
+    }
     /*
     public static boolean actualizar(Mascota mascota) {
         String sql = "UPDATE mascotas SET estado = ? WHERE idMascota = ? ";
@@ -133,7 +153,7 @@ public class MascotaDao {
             ps.setInt(5, mascota.getEdad());
             ps.setString(6, mascota.getTamanio());
             ps.setString(7, mascota.getDescripcion());
-            ps.setString(8, mascota.getFoto());
+            ps.setBytes(8, mascota.getFoto());
 
             if (ps.executeUpdate() > 0) {
                 ResultSet rs = ps.getGeneratedKeys();

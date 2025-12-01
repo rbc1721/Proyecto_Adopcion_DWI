@@ -19,12 +19,13 @@ public class MostrarDatos {
         for (Reporte reporte : reportes) {
 
             int idMascota = reporte.getIdMascota();
-            Mascota mascota = MascotaDao.obtener(idMascota, especie);   
-     
-            if (mascota != null) {
-                MascotaEncontrada me = new MascotaEncontrada(reporte.getCodigo(), reporte.getFecha(), reporte.getDireccion(), reporte.getIdUsuario(), idMascota, mascota.getEspecie(), mascota.getRaza(), mascota.getColor(), mascota.getTamanio(), mascota.getDescripcion(), mascota.getFoto());
+            Mascota mascota = MascotaDao.obtener(idMascota);
+
+            if (mascota != null && mascota.getEspecie().equals(especie)) {                                   
+                MascotaEncontrada me = new MascotaEncontrada(reporte.getCodigo(), reporte.getFecha(), reporte.getDireccion(), reporte.getIdUsuario(), idMascota, mascota.getEspecie(), mascota.getRaza(), mascota.getColor(), mascota.getTamanio(), mascota.getDescripcion());
                 lista.add(me);
-            }        }
+            }
+        }
         return lista;
     }
 }

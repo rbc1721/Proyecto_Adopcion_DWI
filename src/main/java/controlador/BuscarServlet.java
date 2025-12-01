@@ -1,9 +1,9 @@
 package controlador;
 
+import apoyo.Convertir;
 import apoyo.MostrarDatos;
 import dao.MascotaDao;
 import dao.ReporteDao;
-import serviciosExternos.GestionImagenes;
 import java.io.IOException;
 import jakarta.servlet.*;
 import jakarta.servlet.annotation.MultipartConfig;
@@ -22,8 +22,8 @@ import modelo.Reporte;
  * @author Eduardo
  */
 @MultipartConfig(
-        maxFileSize = 1024 * 50, // 50 KB
-        maxRequestSize = 1024 * 100, // 100 KB
+        maxFileSize = 1024 * 512, // 512 KB
+        maxRequestSize = 1024 * 512, // 512 KB
         fileSizeThreshold = 1024 * 10 // 10 KB
 )
 
@@ -31,7 +31,6 @@ public class BuscarServlet extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
     }
 
     @Override
@@ -43,16 +42,19 @@ public class BuscarServlet extends HttpServlet {
 
         try {
             String especie = request.getParameter("especie");
+            List<Reporte> lista = ReporteDao.obtener("Encontrado", "Pendiente");
 
-            List<Reporte> lista = ReporteDao.obtener("Encontrado", "pendiente");
-           
-            List<MascotaEncontrada> listaReportes = MostrarDatos.MostrarMascotaEncontradas(lista, especie);
-            request.setAttribute("listaReportes", listaReportes);
- 
-            if (listaReportes == null || listaReportes.isEmpty()) {
-                request.setAttribute("mensaje", "No se encontraron reportes disponibles");             
+            if (lista == null || lista.isEmpty()) {
+                request.setAttribute("mensaje", "No se encontraron reportes disponibles");
             }
 
+            List<MascotaEncontrada> listaReportes = MostrarDatos.MostrarMascotaEncontradas(lista, especie);
+            request.setAttribute("listaReportes", listaReportes);
+
+            if (listaReportes == null || listaReportes.isEmpty()) {
+                request.setAttribute("mensaje", "No se encontraron reportes disponibles");
+            }
+            System.out.println("La lista de reportes no esta vacía");
         } catch (Exception e) {
             e.printStackTrace();
             request.setAttribute("mensaje", "Error al cargar los reportes de mascota encontradas" + e.getMessage());
@@ -78,36 +80,25 @@ public class BuscarServlet extends HttpServlet {
             String idUsuario = "1";
 
             Part archivo = request.getPart("foto");
+
             if (archivo == null || archivo.getSize() == 0) {
                 response.sendRedirect("buscar.jsp?msg=La+foto+no+se+cargo+correctamente");
                 return;
             }
 
-            if (archivo.getSize() > 1024 * 1024) {
+            if (archivo.getSize() > 512 * 1024) {
                 response.sendRedirect("buscar.jsp?msg=La+foto+excede+1+MB");
                 return;
             }
 
-            String url = GestionImagenes.enviarFoto(archivo);
-            if (url == null) {
-                response.sendRedirect("buscar.jsp?msg=Error+al+subir+la+imagen");
-                return;
-            }
+//            String url = GestionImagenes.enviarFoto(archivo);
+//            if (url == null) {
+//                response.sendRedirect("buscar.jsp?msg=Error+al+subir+la+imagen");
+//                return;
+//            }
+            byte[] foto = Convertir.convertirPartABytes(archivo);
 
-            /*    
-            //Guardar la imagen en el directorio temporal local
-            String carpetaDestino = pageContext.request.contextPath/recursos/;
-
-            System.out.println("La carpeta de destino es: " + carpetaDestino);
-
-            File carpeta = new File(carpetaDestino);
-            if (!carpeta.exists()) carpeta.mkdir();
-
-            String nombreArchivo = System.currentTimeMillis() + "_" + archivo.getSubmittedFileName();       
-            archivo.write(carpetaDestino + File.separator + nombreArchivo);
-
-             */
-            Mascota mascota = new Mascota(nombre, especie, raza, color, edad, tamanio, descripcion, url);
+            Mascota mascota = new Mascota(nombre, especie, raza, color, edad, tamanio, descripcion, foto);
             int idMascota = MascotaDao.registrar(mascota);
             if (idMascota < 1) {
                 response.sendRedirect("buscar.jsp?msg=Error+al+registrar+los+datos+de+la+mascota");

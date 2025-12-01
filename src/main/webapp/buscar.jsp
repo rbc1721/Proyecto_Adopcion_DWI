@@ -157,7 +157,7 @@
                                     <c:forEach var="mascotaEncontrada" items="${listaReportes}">
                                         <div class="col col-lg-2 col-md-3 cool-sm6 h-80">
                                             <div class="card shadow-sm h-80">
-                                                <img src="${mascotaEncontrada.foto}" class="card-img-top" alt="Mascota" loading="lazy" onerror="this.onerror=null; this.src='https://placehold.co/300x200?text=Sin+imagen';">
+                                                <img src="ImagenServlet?id=${mascotaEncontrada.codigo}" class="card-img-top" alt="Mascota" loading="lazy" onerror="this.onerror=null; this.src='https://placehold.co/300x200?text=Sin+imagen';">
 
                                                 <div class="card-body">
                                                     <h5 class="card-title">${mascotaEncontrada.especie}</h5>

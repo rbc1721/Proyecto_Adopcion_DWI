@@ -18,9 +18,8 @@ public class MascotaEncontrada {
     private String color;  
     private String tamanio;
     private String descripcion;
-    private String foto;
 
-    public MascotaEncontrada(int codigo, LocalDate fecha, String direccion, String idUduario, int idMascota, String especie, String raza, String color, String tamanio, String descripcion, String foto) {
+    public MascotaEncontrada(int codigo, LocalDate fecha, String direccion, String idUduario, int idMascota, String especie, String raza, String color, String tamanio, String descripcion) {
         this.codigo = codigo;
         this.fecha = fecha;
         this.direccion = direccion;
@@ -31,7 +30,6 @@ public class MascotaEncontrada {
         this.color = color;
         this.tamanio = tamanio;
         this.descripcion = descripcion;
-        this.foto = foto;
     }
 
     public int getCodigo() {
@@ -113,12 +111,4 @@ public class MascotaEncontrada {
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
     }
-
-    public String getFoto() {
-        return foto;
-    }
-
-    public void setFoto(String foto) {
-        this.foto = foto;
-    }      
 }

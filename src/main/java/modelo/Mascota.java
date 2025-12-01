@@ -14,11 +14,11 @@ public class Mascota {
     private int edad;
     private String tamanio;
     private String descripcion;
-    private String foto;
+    private byte[] foto;
     
     public Mascota(){}
 
-    public Mascota(String nombre, String especie, String raza, String color, int edad, String tamanio, String descripcion, String foto) {
+    public Mascota(String nombre, String especie, String raza, String color, int edad, String tamanio, String descripcion, byte[] foto) {
         this.nombre = nombre;
         this.especie = especie;
         this.raza = raza;
@@ -93,11 +93,11 @@ public class Mascota {
         this.descripcion = descripcion;
     }
 
-    public String getFoto() {
+    public byte[] getFoto() {
         return foto;
     }
 
-    public void setFoto(String foto) {
+    public void setFoto(byte[] foto) {
         this.foto = foto;
     }
     

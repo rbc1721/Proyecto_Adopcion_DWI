@@ -1,5 +1,7 @@
 modelo\MascotaEncontrada.class
+apoyo\Convertir.class
 controlador\BuscarServlet.class
+controlador\ImagenServlet.class
 apoyo\MostrarDatos.class
 config\Conexion.class
 controlador\RegistrarUsuarioServlet.class
