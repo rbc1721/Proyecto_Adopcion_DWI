@@ -9,12 +9,13 @@ public class Conexion {
     private static Conexion instancia;
     private Connection conexion = null;
 
-    private static final String host = "rastreando-huellitas-rastreando-huellitas.g.aivencloud.com";
-    private static final String port = "17573";
-    private static final String db = "rastreando_huellitas";
-    private static final String user = "";
-    private static final String pass = "";   
-    private static final String url = "";
+        private static final String host = "localhost";
+        private static final String port = "3306";
+        private static final String db = "krasota_db";
+        private static final String user = "root";
+        private static final String pass = "";
+        private static final String url = "jdbc:mysql://" + host + ":" + port + "/" + db
+            + "?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true";
 
     private Conexion() throws ClassNotFoundException {
         try {

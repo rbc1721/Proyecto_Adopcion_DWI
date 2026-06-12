@@ -1,12 +1,93 @@
 
 <%@ page pageEncoding="UTF-8" %>
+<%@ page import="modelo.Usuario" %>
+
+<%
+    // Recupera el usuario desde la sesión
+    Usuario usuarioHeader = (Usuario) session.getAttribute("usuarioLogueado");
+    String rolUsuarioHeader = null;
+    if (usuarioHeader != null && usuarioHeader.getPersona() != null) {
+        rolUsuarioHeader = usuarioHeader.getPersona().getRol();
+    }
+%>
+
+<style>
+    .navbar-krasota {
+        background: rgba(236, 198, 202, 0.95);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.6);
+        backdrop-filter: blur(3px);
+    }
+
+    .brand-krasota {
+        text-decoration: none;
+        display: flex;
+        flex-direction: column;
+        line-height: 0.92;
+        margin-right: 1rem;
+    }
+
+    .brand-main {
+        font-family: Georgia, "Times New Roman", serif;
+        font-size: 1.45rem;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        color: #2f2728;
+    }
+
+    .brand-sub {
+        font-family: Arial, sans-serif;
+        font-size: 0.9rem;
+        font-weight: 600;
+        letter-spacing: 0.22em;
+        color: #5a4e50;
+    }
+
+    .navbar-krasota .nav-link {
+        color: #2f2728 !important;
+    }
+
+    .navbar-krasota .nav-link:hover {
+        color: #5a4e50 !important;
+    }
+
+    @media (max-width: 576px) {
+        .brand-main {
+            font-size: 1.15rem;
+        }
+
+        .brand-sub {
+            font-size: 0.74rem;
+        }
+    }
+</style>
+
+<script>
+    (function () {
+        var head = document.head || document.getElementsByTagName('head')[0];
+        if (!head) {
+            return;
+        }
+
+        var iconHref = 'assets/img/Logo-KrasotaSPA.png';
+        var link = head.querySelector("link[rel='icon']") || head.querySelector("link[rel='shortcut icon']");
+
+        if (!link) {
+            link = document.createElement('link');
+            link.rel = 'icon';
+            head.appendChild(link);
+        }
+
+        link.type = 'image/png';
+        link.href = iconHref;
+    })();
+</script>
 
 <header>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm">
+    <nav class="navbar navbar-expand-lg navbar-light shadow-sm navbar-krasota">
         <div class="container">
-            <a class="navbar-brand fw-bold d-flex gap-3 justify-content-center" href="#">
-                <img src="${pageContext.request.contextPath}/assets/img/huellas.png" alt="logo de huellitas"/>
-                Rastreando Huellitas
+            <a class="navbar-brand brand-krasota" href="index.jsp" aria-label="Krasota Spa">
+                <span class="brand-main">KRASOTA</span>
+                <span class="brand-sub">SPA</span>
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
@@ -14,19 +95,36 @@
 
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
-                    <li class="nav-item"><a class="nav-link active" href="index.jsp">Inicio</a></li>
-                    <li class="nav-item"><a class="nav-link" href="buscar.jsp">Buscar Mascota</a></li>
-                    <li class="nav-item"><a class="nav-link" href="reportarMascota.jsp">Encontre una Mascota</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Como funciona</a></li>
+                    <li class="nav-item"><a class="nav-link" href="index.jsp">Inicio</a></li>
+                    <li class="nav-item"><a class="nav-link" href="index.jsp#promociones">Promociones</a></li>
+
+                    <% if (usuarioHeader != null && "ADMIN".equalsIgnoreCase(rolUsuarioHeader)) { %>
+                        <li class="nav-item"><a class="nav-link" href="plantillas.jsp">Plantillas</a></li>
+                        <li class="nav-item"><a class="nav-link" href="campanias.jsp">Campanas</a></li>
+                        <li class="nav-item"><a class="nav-link" href="clientes.jsp">Clientes</a></li>
+                        <li class="nav-item"><a class="nav-link" href="home.jsp">Panel admin</a></li>
+                    <% } %>
+
+                    <% if (usuarioHeader != null && "CLIENTE".equalsIgnoreCase(rolUsuarioHeader)) { %>
+                        <li class="nav-item"><a class="nav-link" href="misPromociones.jsp">Mis promociones</a></li>
+                    <% } %>
+
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="accountDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             <i class="bi bi-person me-1"></i> Cuenta
                         </a>
                         <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="accountDropdown">
-                            <li><a class="dropdown-item" href="login.jsp"><i class="bi bi-box-arrow-in-right me-1"></i> Iniciar Sesión</a></li>
-                            <li><a class="dropdown-item" href="registro.jsp"><i class="bi bi-person-plus me-1"></i> Registrarse</a></li>
+                            <% if (usuarioHeader == null) { %>
+                                <li><a class="dropdown-item" href="login.jsp"><i class="bi bi-box-arrow-in-right me-1"></i> Iniciar sesion</a></li>
+                                <li><a class="dropdown-item" href="registro.jsp"><i class="bi bi-person-plus me-1"></i> Registrarse</a></li>
+                            <% } else { %>
+                                <li class="dropdown-item">
+                                    <span class="fw-bold">Hola, <%= usuarioHeader.getPersona().getNombres() %></span>
+                                </li>
+                                <li><a class="dropdown-item" href="LogoutServlet"><i class="bi bi-box-arrow-right me-1"></i> Cerrar sesion</a></li>
+                            <% } %>
                         </ul>
-                    </li>    
+                    </li>
                 </ul>
             </div>
         </div>

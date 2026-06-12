@@ -16,7 +16,7 @@
 
 <!-- Contenido principal -->
 <main class="container py-5">
-    <form action="RegistrarUsuarioServlet" method="post" class="form-container">
+    <form action="RegistrarUsuarioServlet" method="post" class="form-container" autocomplete="off">
         <h2 class="mb-4">Registro de Usuario</h2>
         <c:if test="${param.msg == 'registro_ok'}">
         <div class="alert alert-success" role="alert">
@@ -26,6 +26,11 @@
         <c:if test="${param.msg == 'error'}">
             <div class="alert alert-danger" role="alert">
                 Ocurrió un error durante el registro. Intenta nuevamente.
+            </div>
+        </c:if>
+        <c:if test="${param.msg == 'correo_existe'}">
+            <div class="alert alert-warning" role="alert">
+                El correo [<c:out value="${param.correo}" />] ya está registrado. Inicia sesión o usa otro correo.
             </div>
         </c:if>
         <div class="mb-3">
@@ -42,19 +47,15 @@
         </div>
         <div class="mb-3">
             <label for="correo" class="form-label">Correo electrónico</label>
-            <input type="email" class="form-control" id="correo" name="correo" required />
+            <input type="email" class="form-control" id="correo" name="correo" required autocomplete="off" />
         </div>
         <div class="mb-3">
             <label for="contrasenia" class="form-label">Contraseña</label>
-            <input type="password" class="form-control" id="contrasenia" name="contrasenia" required />
+            <input type="password" class="form-control" id="contrasenia" name="contrasenia" required autocomplete="new-password" />
         </div>
         <div class="mb-3">
-            <label for="rol" class="form-label">Rol</label>
-            <select class="form-select" id="rol" name="rol" required>
-                <option value="" disabled selected>Seleccione un rol</option>
-                <option value="administrador">Administrador</option>
-                <option value="persona">Persona</option>
-            </select>
+            <label class="form-label">Rol asignado</label>
+            <input type="text" class="form-control" value="Cliente" readonly />
         </div>
         <button type="submit" class="btn btn-success w-100">Registrarse</button>
     </form>
@@ -63,6 +64,22 @@
         ¿Ya tienes una cuenta? <a href="login.jsp" class="text-light">Inicia sesión aquí</a>
     </p>
 </main>
+
+<c:if test="${param.msg == 'correo_existe'}">
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var inputCorreo = document.getElementById('correo');
+            var inputContrasenia = document.getElementById('contrasenia');
+            if (inputCorreo) {
+                inputCorreo.value = '';
+                inputCorreo.focus();
+            }
+            if (inputContrasenia) {
+                inputContrasenia.value = '';
+            }
+        });
+    </script>
+</c:if>
 
 <!-- Footer -->
 <%@ include file="WEB-INF/componentes/footer.jspf" %>

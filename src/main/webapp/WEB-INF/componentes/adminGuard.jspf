@@ -1,0 +1,14 @@
+<%@ page import="modelo.Usuario" %>
+<%
+    Usuario usuarioLogueado = (Usuario) session.getAttribute("usuarioLogueado");
+    if (usuarioLogueado == null) {
+        response.sendRedirect("login.jsp");
+        return;
+    }
+
+    String rol = (usuarioLogueado.getPersona() != null) ? usuarioLogueado.getPersona().getRol() : null;
+    if (rol == null || !"ADMIN".equalsIgnoreCase(rol)) {
+        response.sendRedirect("index.jsp?error=sin_permiso");
+        return;
+    }
+%>

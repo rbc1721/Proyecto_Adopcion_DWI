@@ -2,7 +2,8 @@ package dao;
 
 /**
  *
- * @author huamanls
+ * @author Lizbeth Huaman Ventura -1420446
+ * Fecha: 10/06/2026
  */
 import config.Conexion;
 import modelo.Persona;
@@ -14,32 +15,62 @@ import java.sql.ResultSet;
 
 public class UsuarioDao {
 
+    public boolean existeCorreo(String correo) {
+        String sql = "SELECT 1 FROM personas WHERE correo = ? LIMIT 1";
+
+        try {
+            Connection conn = Conexion.getInstancia().getConexion();
+            try (PreparedStatement ps = conn.prepareStatement(sql)) {
+                ps.setString(1, correo);
+                try (ResultSet rs = ps.executeQuery()) {
+                    return rs.next();
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return false;
+    }
+
     // REGISTRO
     public boolean registrarUsuario(Usuario usuario) {
-        String sqlPersona = "INSERT INTO personas (nombres, apellidos, direccion, rol) VALUES (?, ?, ?, ?)";
-        String sqlUsuario = "INSERT INTO usuarios (contrasenia, idPersona) VALUES (?, ?)";
+        String sqlPersona = "INSERT INTO personas (nombres, apellidos, direccion, correo, rol) VALUES (?, ?, ?, ?, ?)";
+        String sqlUsuario = "INSERT INTO usuarios (idUsuario, contrasenia, idPersona) VALUES (?, ?, ?)";
 
         try {
             Connection conn = Conexion.getInstancia().getConexion();
 
-            // Insertar persona primero
-            PreparedStatement psPersona = conn.prepareStatement(sqlPersona, PreparedStatement.RETURN_GENERATED_KEYS);
-            psPersona.setString(1, usuario.getPersona().getNombres());
-            psPersona.setString(2, usuario.getPersona().getApellidos());
-            psPersona.setString(3, usuario.getPersona().getDireccion());
-            psPersona.setString(4, usuario.getPersona().getRol());
-            psPersona.executeUpdate();
+            try (PreparedStatement psPersona = conn.prepareStatement(sqlPersona, PreparedStatement.RETURN_GENERATED_KEYS)) {
+                psPersona.setString(1, usuario.getPersona().getNombres());
+                psPersona.setString(2, usuario.getPersona().getApellidos());
+                psPersona.setString(3, usuario.getPersona().getDireccion());
+                psPersona.setString(4, usuario.getPersona().getCorreo());
+                psPersona.setString(5, usuario.getPersona().getRol());
+                psPersona.executeUpdate();
 
-            ResultSet rs = psPersona.getGeneratedKeys();
-            if (rs.next()) {
-                int idPersona = rs.getInt(1);
+                try (ResultSet rsPersona = psPersona.getGeneratedKeys()) {
+                    if (rsPersona.next()) {
+                        int idPersona = rsPersona.getInt(1);
 
-                // Insertar usuario con idPersona
-                PreparedStatement psUsuario = conn.prepareStatement(sqlUsuario);
-                psUsuario.setString(1, usuario.getContrasenia());
-                psUsuario.setInt(2, idPersona);
+                        String sqlMaxId = "SELECT COALESCE(MAX(idUsuario), 0) + 1 AS nuevoId FROM usuarios";
+                        int nuevoIdUsuario = 1;
 
-                return psUsuario.executeUpdate() > 0;
+                        try (PreparedStatement psMax = conn.prepareStatement(sqlMaxId);
+                             ResultSet rsId = psMax.executeQuery()) {
+                            if (rsId.next()) {
+                                nuevoIdUsuario = rsId.getInt("nuevoId");
+                            }
+                        }
+
+                        try (PreparedStatement psUsuario = conn.prepareStatement(sqlUsuario)) {
+                            psUsuario.setInt(1, nuevoIdUsuario);
+                            psUsuario.setString(2, usuario.getContrasenia());
+                            psUsuario.setInt(3, idPersona);
+                            return psUsuario.executeUpdate() > 0;
+                        }
+                    }
+                }
             }
 
         } catch (Exception e) {
@@ -50,29 +81,33 @@ public class UsuarioDao {
 
     // LOGIN
     public Usuario validarLogin(String correo, String contrasenia) {
-        String sql = "SELECT u.idUsuario, u.contrasenia, p.* FROM usuario u JOIN persona p ON u.idPersona = p.idPersona WHERE p.nombres = ? AND u.contrasenia = ?";
+        String sql = "SELECT u.idUsuario, u.contrasenia, p.* FROM usuarios u "
+                + "JOIN personas p ON u.idPersona = p.idPersona "
+                + "WHERE p.correo = ? AND u.contrasenia = ?";
 
         try {
             Connection conn = Conexion.getInstancia().getConexion();
-            PreparedStatement ps = conn.prepareStatement(sql);
-            ps.setString(1, correo); 
-            ps.setString(2, contrasenia);
+            try (PreparedStatement ps = conn.prepareStatement(sql)) {
+                ps.setString(1, correo);
+                ps.setString(2, contrasenia);
 
-            ResultSet rs = ps.executeQuery();
-            if (rs.next()) {
-                Persona p = new Persona();
-                p.setIdPersona(rs.getInt("idPersona"));
-                p.setNombres(rs.getString("nombres"));
-                p.setApellidos(rs.getString("apellidos"));
-                p.setDireccion(rs.getString("direccion"));
-                p.setRol(rs.getString("rol"));
+                try (ResultSet rs = ps.executeQuery()) {
+                    if (rs.next()) {
+                        Persona p = new Persona();
+                        p.setIdPersona(rs.getInt("idPersona"));
+                        p.setNombres(rs.getString("nombres"));
+                        p.setApellidos(rs.getString("apellidos"));
+                        p.setDireccion(rs.getString("direccion"));
+                        p.setRol(rs.getString("rol"));
 
-                Usuario u = new Usuario();
-                u.setIdUsuario(rs.getInt("idUsuario"));
-                u.setContrasenia(rs.getString("contrasenia"));
-                u.setPersona(p);
+                        Usuario u = new Usuario();
+                        u.setIdUsuario(rs.getInt("idUsuario"));
+                        u.setContrasenia(rs.getString("contrasenia"));
+                        u.setPersona(p);
 
-                return u;
+                        return u;
+                    }
+                }
             }
 
         } catch (Exception e) {

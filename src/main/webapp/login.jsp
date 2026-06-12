@@ -5,8 +5,11 @@
     <head>
         <meta charset="UTF-8"/>
         <title>Cuenta - Iniciar sesión</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
+        <link rel="icon" type="image/png" href="assets/img/Logo-KrasotaSPA.png"/>
         <!-- Incluye Bootstrap desde CDN -->
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet"/>
         <link href="assets/css/estilos.css" rel="stylesheet" type="text/css"/>
     </head>
     <body class="fondo-login">
@@ -34,6 +37,11 @@
                         Usuario o contraseña incorrectos.
                     </div>
                 </c:if>
+                <div class="alert alert-secondary mt-3" role="alert">
+                    <strong>Credenciales de prueba:</strong><br/>
+                    Admin: admin@spa.com / 123456<br/>
+                    Cliente: cliente@spa.com / 123456
+                </div>
                 <p class="mt-3">
                     ¿No tienes una cuenta? <a href="registro.jsp">Regístrate aquí</a>
                 </p>

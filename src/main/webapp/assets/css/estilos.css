@@ -1,10 +1,12 @@
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Montserrat:wght@500;600&display=swap');
+
 /*
 Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
 Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css to edit this template
 */
 /* 
-    Created on : 13 oct 2025, 12:48:10 a.m.
-    Author     : huamanls
+    Created on : 10/06/2026
+    Author     : Lizbeth Huaman Ventura -1420446
 */
 
 body.fondo-login {
@@ -24,10 +26,63 @@ body.fondo-registro {
 }
 
 .form-container {
-    background: rgba(255, 255, 255, 0.92);
+    background: rgba(255, 255, 255, 0.95);
     padding: 2rem;
     border-radius: 12px;
     max-width: 400px;
     width: 100%;
-    box-shadow: 0 0 20px rgba(0,0,0,0.2);
+    border: 1px solid rgba(255, 255, 255, 0.65);
+    box-shadow: 0 14px 28px rgba(102, 66, 74, 0.18);
+}
+
+.navbar {
+    padding-top: 0.4rem;
+    padding-bottom: 0.4rem;
+}
+
+.navbar-krasota {
+    background: rgba(236, 198, 202, 0.92);
+    backdrop-filter: blur(3px);
+}
+
+.brand-krasota {
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    line-height: 0.92;
+    margin-right: 1rem;
+}
+
+.brand-main {
+    font-family: 'Cinzel', Georgia, serif;
+    font-size: 1.55rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    color: #0f4d43;
+}
+
+.brand-sub {
+    font-family: 'Montserrat', Arial, sans-serif;
+    font-size: 1.02rem;
+    font-weight: 500;
+    letter-spacing: 0.24em;
+    color: #5f8f7f;
+}
+
+.navbar-krasota .nav-link {
+    color: #3b4a45;
+}
+
+.navbar-krasota .nav-link:hover {
+    color: #0f4d43;
+}
+
+@media (max-width: 576px) {
+    .brand-main {
+        font-size: 1.2rem;
+    }
+
+    .brand-sub {
+        font-size: 0.8rem;
+    }
 }

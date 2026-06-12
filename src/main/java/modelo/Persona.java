@@ -2,22 +2,25 @@ package modelo;
 
 /**
  *
- * @author huamanls
+ * @author Lizbeth Huaman Ventura -1420446
+ * Fecha: 10/06/2026
  */
 public class Persona {
     private int idPersona;
     private String nombres;
     private String apellidos;
     private String direccion;
+    private String correo;
     private String rol;
 
     public Persona() {}
 
-    public Persona(int idPersona, String nombres, String apellidos, String direccion, String rol) {
+    public Persona(int idPersona, String nombres, String apellidos, String direccion, String correo, String rol) {
         this.idPersona = idPersona;
         this.nombres = nombres;
         this.apellidos = apellidos;
         this.direccion = direccion;
+        this.correo = correo;
         this.rol = rol;
     }
 
@@ -53,6 +56,13 @@ public class Persona {
         this.direccion = direccion;
     }
 
+     public String getCorreo() {
+        return correo;
+    }
+     
+    public void setCorreo(String correo) {
+        this.correo = correo;
+    }
     public String getRol() {
         return rol;
     }

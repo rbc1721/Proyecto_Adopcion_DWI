@@ -2,18 +2,39 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>Inicio | Proyecto Adopción Huellitas</title>
+  <title>Inicio | Krasota Spa</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <!-- Bootstrap 5 -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
   <style>
+    :root {
+      --rose-50: #f8e3e2;
+      --rose-100: #edd2d1;
+      --rose-200: #d8b4b1;
+      --ink-900: #2f2728;
+      --ink-700: #5a4e50;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background:
+        radial-gradient(circle at 10% 10%, rgba(255, 255, 255, 0.3), transparent 40%),
+        radial-gradient(circle at 90% 80%, rgba(255, 255, 255, 0.2), transparent 35%),
+        linear-gradient(135deg, var(--rose-50), var(--rose-100));
+      color: var(--ink-900);
+    }
+
     .hero {
-      background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), 
-                  url('https://images.unsplash.com/photo-1601758123927-1962b8c4d82e') no-repeat center center;
-      background-size: cover;
-      color: white;
-      padding: 100px 20px;
+      background: linear-gradient(145deg, var(--rose-100), var(--rose-200));
+      border: 1px solid rgba(255, 255, 255, 0.5);
+      border-radius: 18px;
+      box-shadow: 0 14px 30px rgba(94, 51, 64, 0.15);
+      color: var(--ink-900);
+      padding: 90px 20px;
+      margin: 28px auto;
+      max-width: 1120px;
       text-align: center;
     }
 
@@ -25,10 +46,17 @@
     .hero p {
       font-size: 1.3rem;
       margin-top: 20px;
+      color: var(--ink-700);
     }
 
-    .btn-mascota {
+    .btn-spa {
       margin-top: 30px;
+      background: #8f686d;
+      border: none;
+    }
+
+    .btn-spa:hover {
+      background: #78575c;
     }
   </style>
 </head>
@@ -37,7 +65,7 @@
   <!-- NAVBAR -->
   <nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm">
     <div class="container">
-      <a class="navbar-brand fw-bold" href="#">¡Ayudanos!</a>
+      <a class="navbar-brand fw-bold" href="#">Krasota Spa</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -45,10 +73,10 @@
       <div class="collapse navbar-collapse" id="navbarNav">
   <ul class="navbar-nav ms-auto">
     <li class="nav-item"><a class="nav-link active" href="#">Inicio</a></li>
-    <li class="nav-item"><a class="nav-link" href="buscar.jsp">Buscar Mascota</a></li>
-    <li class="nav-item"><a class="nav-link" href="reportarMascota.jsp">Reportar Mascota Perdida</a></li>
-    <li class="nav-item"><a class="nav-link" href="#">¿Cómo funciona?</a></li>
-    <li class="nav-item"><a class="nav-link" href="#">Historias</a></li>
+    <li class="nav-item"><a class="nav-link" href="home.jsp">Panel</a></li>
+    <li class="nav-item"><a class="nav-link" href="campanias.jsp">Campañas</a></li>
+    <li class="nav-item"><a class="nav-link" href="clientes.jsp">Clientes</a></li>
+    <li class="nav-item"><a class="nav-link" href="plantillas.jsp">Plantillas</a></li>
   </ul>
 </div>
       </div>
@@ -57,9 +85,9 @@
 
   <!-- HERO -->
   <div class="hero">
-    <h1>¿Perdiste a tu mascota?</h1>
-    <p>Te ayudamos a encontrarla!!.<br><strong>Â¡Avisemos a todos, cada segundo cuenta!</strong></p>
-    <a href="buscar.jsp" class="btn btn-success btn-lg btn-mascota">Buscar o Reportar Mascota</a>
+    <h1>Krasota Spa</h1>
+    <p>Bienvenida a una experiencia de bienestar premium.<br><strong>Descubre promociones exclusivas en masajes y tratamientos relajantes.</strong></p>
+    <a href="home.jsp" class="btn btn-success btn-lg btn-spa">Ver promociones del spa</a>
   </div>
 
   <!-- Bootstrap JS -->

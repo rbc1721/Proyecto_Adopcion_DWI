@@ -1,16 +1,9 @@
-modelo\MascotaEncontrada.class
 apoyo\Convertir.class
-controlador\BuscarServlet.class
-controlador\ImagenServlet.class
-apoyo\MostrarDatos.class
 config\Conexion.class
+controlador\LogoutServlet.class
 controlador\RegistrarUsuarioServlet.class
-dao\ReporteDao.class
 dao\UsuarioDao.class
 modelo\Persona.class
-modelo\Mascota.class
 serviciosExternos\GestionImagenes.class
-dao\MascotaDao.class
 modelo\Usuario.class
-modelo\Reporte.class
 controlador\LoginServlet.class

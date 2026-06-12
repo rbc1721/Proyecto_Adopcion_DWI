@@ -1,0 +1,2 @@
+# krasota_app
+PROYECTO ACADEMICO

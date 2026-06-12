@@ -2,7 +2,8 @@ package modelo;
 
 /**
  *
- * @author huamanls
+ * @author Lizbeth Huaman Ventura -1420446
+ * Fecha: 10/06/2026
  */
 
 public class Usuario {
